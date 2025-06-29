@@ -6,7 +6,8 @@
   <meta name="color-scheme" content="only light">
   <title>Patricia & Paul</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2280%22>💍</text></svg>">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Lato&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Lato&family=Imperial+Script&display=swap" rel="stylesheet" />
+
   <script src="https://cdn.tailwindcss.com" data-tailwind-config='{"darkMode":"class"}'></script>
   <style>
     :root {
@@ -22,7 +23,7 @@
     }
   
     body {
-      font-family: 'Lato', sans-serif;
+      font-family: 'Playfair Display', sans-serif;
       background-color: var(--primary) !important; 
       color: var(--accent) !important;             
     }
@@ -98,20 +99,20 @@
     }
   
     .card {
-      background-color: white;
+      /*background-color: white;*/
       border-radius: 0.75rem;
       padding: 1.5rem;
       margin: 1rem auto;
       max-width: 450px;
       text-align: left;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
-      border: 1px solid var(--secondary);
-      color: var(--primary); /* Dunkle Schrift in Cards */
+      box-shadow: 0 4px 8px var(--primary);
+      border: 1px solid var(--primary);
+      color: var(--accent); /* Dunkle Schrift in Cards */
     }
   
     .card h3, .card h4 {
       margin-bottom: 0.5rem;
-      color: var(--primary);
+      color: var(--accent);
     }
   
     form#rsvp-form {
@@ -155,7 +156,7 @@
     #faq-section {
     /* Hintergrund Burgunderrot der Seite */
     background-color: var(--primary);
-  }
+    }
 
   #faq-content > div {
     background: white;
@@ -168,7 +169,7 @@
 
   .faq-question {
     font-weight: 600;
-    color: var(--primary);
+    color: var(--accent);
     user-select: none;
     position: relative;
     padding-right: 1.5rem;
@@ -182,7 +183,7 @@
     top: 50%;
     transform: translateY(-50%);
     transition: transform 0.3s ease;
-    color: var(--primary);
+    color: var(--accent);
   }
 
   .faq-question.open::after {
@@ -193,13 +194,36 @@
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.3s ease, padding 0.3s ease;
-    color: var(--primary);
+    color: var(--accent);
     padding-top: 0;
   }
 
   .faq-question.open + .faq-answer {
     max-height: 500px; /* groß genug für Inhalt */
     padding-top: 0.5rem;
+  }
+
+  .save-date {
+    font-family: 'Imperial Script', cursive;
+    font-size: 5.5rem;
+    color: var(--accent) !important;
+  }
+
+  .save-date {
+    font-family: 'Imperial Script', cursive;
+    font-size: 5.5rem;
+    color: var(--accent) !important;
+  }
+
+  .fade-slide {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 3s ease-out, transform 3s ease-out;
+  }
+
+  .fade-slide.visible {
+    opacity: 1;
+    transform: translateY(0);
   }
   </style>
   
@@ -225,13 +249,14 @@
     </div>
   </nav>  
   <section class="text-center py-10 px-4" style="background-color: var(--accent); color: var(--primary);">
-    <h1 data-i18n="invitation.hello" id="invitation" class="text-4xl md:text-5xl mb-4"></h1>
+    <h1 data-i18n="invitation.hello.singular" id="invitation" class="text-4xl md:text-5xl mb-4"></h1>
     <p data-i18n="invitation.greeting.singular" id="invitation.greeting" class="text-lg md:text-xl mb-6"></p>
     <img src="foto-1.jpg" alt="Paarfoto" class="mx-auto rounded-2xl shadow-lg max-w-md w-full max-w-[90%] sm:max-w-md border border-[var(--accent)]" onclick="openModal(this.src)" />
   </section>
-
+  <section class="py-10 px-4">
+    <img src="gartenhochzeit.jpg" alt="Gartenhochzeit" class="w-full h-auto rounded-t-xl fade-slide" onclick="openModal(this.src)" />
+  </section>
   <section id="save-date" class="text-center py-10 px-4">
-    <h2 data-i18n="saveDate.title" id="save-date-title" class="text-3xl mb-6"></h2>
     <div id="save-date-content"></div>
   </section>
 
@@ -240,7 +265,7 @@
     <form id="rsvp-form" autocomplete="off">
       <input type="hidden" name="name" id="input-name" />    
       <label>
-        <span data-i18n="form.attending"></span>
+        <span id="form-attending" data-i18n="form.attending.singular"></span>
         <select name="attending" id="attending-select" required>
           <!-- Optionen werden dynamisch gesetzt -->
         </select>
@@ -318,7 +343,8 @@
     const translations = {
       de: {
         "nav.greeting": "Willkommen zur Hochzeit",
-        "invitation.hello": "Lass uns feiern",
+        "invitation.hello.singular": "Lass uns feiern",
+        "invitation.hello.plural": "Lasst uns feiern",
         "invitation.greeting.singular": "Wir laden dich herzlich zu unserer Hochzeit ein!",
         "invitation.greeting.plural": "Wir laden euch herzlich zu unserer Hochzeit ein!",
         "saveDate.title": "Save the date",
@@ -326,7 +352,8 @@
         "indonesia": "Indonesien",
         "rsvp.title.singular": "Sag uns Bescheid",
         "rsvp.title.plural": "Sagt uns Bescheid",
-        "form.attending": "Wirst du teilnehmen?",
+        "form.attending.singular": "Wirst du teilnehmen?",
+        "form.attending.plural": "Werdet ihr teilnehmen?",
         "form.pleaseChoose": "Bitte wählen",
         "form.yes": "Ja!",
         "form.onlyAustria": "Nur in Österreich",
@@ -365,7 +392,8 @@
       },
       en: {
         "nav.greeting": "Welcome to the wedding",
-        "invitation.hello": "Celebrate with us",
+        "invitation.hello.singular": "Celebrate with us",
+        "invitation.hello.plural": "Celebrate with us",
         "invitation.greeting.singular": "We warmly invite you to our wedding!",
         "invitation.greeting.plural": "We warmly invite you to our wedding!",
         "saveDate.title": "Save the date",
@@ -373,7 +401,8 @@
         "indonesia": "Indonesia",
         "rsvp.title.singular": "Let us know",
         "rsvp.title.plural": "Let us know",
-        "form.attending": "Will you attend?",
+        "form.attending.singular": "Will you attend?",
+        "form.attending.plural": "Will you attend?",
         "form.pleaseChoose": "Please choose",
         "form.yes": "Yes!",
         "form.onlyAustria": "only to Austria",
@@ -412,7 +441,8 @@
       },
       id: {
         "nav.greeting": "Selamat datang di pernikahan",
-        "invitation.hello": "Ayo rayakan bersama",
+        "invitation.hello.singular": "Ayo rayakan bersama",
+        "invitation.hello.plural": "Ayo rayakan bersama",
         "invitation.greeting.singular": "Kami mengundang Anda dengan hangat ke pernikahan kami!",
         "invitation.greeting.plural": "Kami mengundang Anda dengan hangat ke pernikahan kami!",
         "saveDate.title": "Tandai tanggalnya",
@@ -420,7 +450,8 @@
         "indonesia": "Indonesia",
         "rsvp.title.singular": "Beri tahu kami",
         "rsvp.title.plural": "Beri tahu kami",
-        "form.attending": "Apakah Anda akan datang?",
+        "form.attending.singular": "Apakah Anda akan datang?",
+        "form.attending.plural": "Apakah Anda akan datang?",
         "form.pleaseChoose": "Silakan pilih",
         "form.yes": "Ya!",
         "form.onlyAustria": "Hanya di Austria",
@@ -463,9 +494,17 @@
 
     const data = {
       at: `<div class="card">
-        <img src="gartenhochzeit.jpg" alt="Gartenhochzeit" class="w-full h-auto rounded-t-xl" onclick="openModal(this.src)" />
+        <br>
+        <h1 class="save-date fade-slide text-center">${text["saveDate.title"]}</h1>
+        <p class="text-center text-3xl">04. August 2026</p>
+        </div>
+      <div class="card">
+        <h3>Gartenhochzeit</h3>
+        <p><strong>Wo:</strong> Wallhof, Doppl 16, 4311 Schwertberg</p>
+        <p><strong>Dresscode:</strong> siehe unten</p>
+        <p><strong>Beginn:</strong> 13:30 Uhr</p>
       </div>
-        <h2 data-i18n="faq.title"></h2>
+      <h2 data-i18n="faq.title"></h2>
       <div class="card">
         <div class="faq-question">${text["faq.at.question1"]}</div>
         <div class="faq-answer">${text["faq.at.answer1"]}</div>
@@ -681,8 +720,9 @@
       partnerName = decodeURIComponent(partnerParam.replace(/-/g, ' '));
       const partnerFirstName = partnerName.split(' ')[0];
         document.getElementById("rsvp-text").innerText = `${text["rsvp.title.plural"]}, ${firstName} ` + dict["and"] + ` ${partnerFirstName}`;
-        document.getElementById("invitation").innerText += `, ${firstName} ` + dict["and"] + ` ${partnerFirstName}!`;
+        document.getElementById("invitation").innerText = `${text["invitation.hello.plural"]}, ${firstName} ` + dict["and"] + ` ${partnerFirstName}!`;
         document.getElementById("invitation.greeting").innerText = `${text["invitation.greeting.plural"]}`;
+        document.getElementById("form-attending").innerText = `${text["form.attending.plural"]}`;
     } else {    
       document.getElementById("rsvp-text").innerText += `, ${firstName}`;
       document.getElementById("invitation").innerText += `, ${firstName}!`;
@@ -692,6 +732,22 @@
 
   document.addEventListener("DOMContentLoaded", () => {
     translatePage(lang);
+  });
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+        }
+      });
+    }, {
+      threshold: 0.1
+    });
+
+    document.querySelectorAll('.fade-slide').forEach(el => {
+      observer.observe(el);
+    });
   });
   </script>
 </body>

@@ -26,6 +26,13 @@
       background-color: var(--primary) !important; 
       color: var(--accent) !important;             
     }
+
+    @media (prefers-color-scheme: dark) {
+      html, body {
+        background-color: var(--primary) !important;
+        color: var(--accent) !important;
+      }
+    }
   
     h1 {
       font-family: 'Playfair Display', serif;
@@ -266,6 +273,8 @@
   </div>
   
   <script>
+    document.documentElement.classList.remove('dark');
+
     function changeLanguage(lang) {
       const url = new URL(window.location.href);
       url.searchParams.set('lang', lang); // Setzt oder ersetzt den "lang"-Parameter

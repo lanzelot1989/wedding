@@ -3,25 +3,33 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="only light">
   <title>Patricia & Paul</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2280%22>💍</text></svg>">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Lato&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+    }
+  </script>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    html {
-      color-scheme: light !important;
-    }
-
     :root {
       --primary: #590b18;    
       --secondary: #62745c;
       --accent: #f5ebd0;     
     }
+    
+    html {
+      color-scheme: light !important;
+      background-color: var(--primary) !important;
+      color: var(--accent) !important;
+    }
   
     body {
       font-family: 'Lato', sans-serif;
-      background-color: var(--primary); 
-      color: var(--accent);             
+      background-color: var(--primary) !important; 
+      color: var(--accent) !important;             
     }
   
     h1 {

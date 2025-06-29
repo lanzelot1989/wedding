@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Patricia & Paul</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2280%22>💍</text></svg>">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Lato&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root {
+      --primary: #590b18;    
+      --secondary: #62745c;
+      --accent: #f5ebd0;     
+    }
+  
+    body {
+      font-family: 'Lato', sans-serif;
+      background-color: var(--primary); 
+      color: var(--accent);             
+    }
+  
+    h1 {
+      font-family: 'Playfair Display', serif;
+      color: var(--primary);
+    }
+    
+    h2, h3 {
+      font-family: 'Playfair Display', serif;
+      color: var(--accent);
+    }
+  
+    nav {
+      background-color: var(--primary);
+      color: var(--accent);
+      padding: 1.5rem;
+      text-align: center;
+      font-weight: 600;
+    }
+  
+    .tab-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+  
+    .tab-button {
+      background-color: transparent;
+      border: 2px solid var(--secondary);
+      color: var(--accent); /* Beige Text auf dunklem Hintergrund */
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+  
+    .tab-button:hover {
+      background-color: var(--secondary);
+      color: var(--accent);
+    }
+  
+    .tab-button.active {
+      background-color: var(--accent);
+      color: var(--primary);
+      border-color: var(--accent);
+    }
+  
+    .tab-content {
+      display: none;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+  
+    .tab-content.active {
+      display: block;
+    }
+  
+    .card {
+      background-color: white;
+      border-radius: 0.75rem;
+      padding: 1.5rem;
+      margin: 1rem auto;
+      max-width: 450px;
+      text-align: left;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+      border: 1px solid var(--secondary);
+      color: var(--primary); /* Dunkle Schrift in Cards */
+    }
+  
+    .card h3, .card h4 {
+      margin-bottom: 0.5rem;
+      color: var(--primary);
+    }
+  
+    form#rsvp-form {
+      max-width: 500px;
+      margin: 0 auto;
+      padding: 2rem;
+      border-radius: 0.75rem;
+      background-color: white;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+      border: 1px solid var(--secondary);
+      color: var(--primary);
+    }
+  
+    form#rsvp-form select,
+    form#rsvp-form input[type="text"] {
+      width: 100%;
+      padding: 0.5rem;
+      margin-top: 0.25rem;
+      margin-bottom: 1.25rem;
+      border: 1px solid #d1d5db;
+      border-radius: 0.375rem;
+    }
+  
+    form#rsvp-form button {
+      background-color: var(--accent);   /* Beige Button */
+      color: var(--primary);             /* Dunkle Schrift */
+      font-weight: bold;
+      padding: 0.75rem 1.5rem;
+      border-radius: 0.5rem;
+      transition: background-color 0.3s ease;
+    }
+  
+    form#rsvp-form button:hover {
+      background-color: #e8dbc1;
+    }
+  
+    footer {
+      color: var(--accent);
+    }
+  
+    #faq-section {
+    /* Hintergrund Burgunderrot der Seite */
+    background-color: var(--primary);
+  }
+
+  #faq-content > div {
+    background: white;
+    border-radius: 0.75rem;
+    margin-bottom: 1rem;
+    padding: 1rem 1.5rem;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+    cursor: pointer;
+  }
+
+  .faq-question {
+    font-weight: 600;
+    color: var(--primary);
+    user-select: none;
+    position: relative;
+    padding-right: 1.5rem;
+  }
+
+  /* Pfeil nach rechts/unten */
+  .faq-question::after {
+    content: "▶";
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: transform 0.3s ease;
+    color: var(--primary);
+  }
+
+  .faq-question.open::after {
+    transform: translateY(-50%) rotate(90deg);
+  }
+
+  .faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+    color: var(--primary);
+    padding-top: 0;
+  }
+
+  .faq-question.open + .faq-answer {
+    max-height: 500px; /* groß genug für Inhalt */
+    padding-top: 0.5rem;
+  }
+  </style>
+  
+</head>
+<body>
+  <nav class="w-full flex justify-end p-2">
+    <div class="flex gap-3 items-center">
+      <button onclick="changeLanguage('de')" title="Deutsch (Österreich)"
+        class="transition transform hover:scale-110 focus:outline-none rounded-full p-1 border-2"
+        id="lang-de">
+        <img src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f1e6-1f1f9.svg" alt="🇦🇹" class="w-6 h-6">
+      </button>
+      <button onclick="changeLanguage('en')" title="English (USA)"
+        class="transition transform hover:scale-110 focus:outline-none rounded-full p-1 border-2"
+        id="lang-en">
+        <img src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f1fa-1f1f8.svg" alt="🇺🇸" class="w-6 h-6">
+      </button>
+      <button onclick="changeLanguage('id')" title="Bahasa (Indonesia)"
+        class="transition transform hover:scale-110 focus:outline-none rounded-full p-1 border-2"
+        id="lang-id">
+        <img src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f1ee-1f1e9.svg" alt="🇮🇩" class="w-6 h-6">
+      </button>
+    </div>
+  </nav>  
+  <section class="text-center py-10 px-4" style="background-color: var(--accent); color: var(--primary);">
+    <h1 data-i18n="invitation.hello" id="invitation" class="text-4xl md:text-5xl mb-4"></h1>
+    <p data-i18n="invitation.greeting" class="text-lg md:text-xl mb-6"></p>
+    <img src="foto-1.jpg" alt="Paarfoto" class="mx-auto rounded-2xl shadow-lg max-w-md w-full max-w-[90%] sm:max-w-md border border-[var(--accent)]" onclick="openModal(this.src)" />
+  </section>
+
+  <section id="save-date" class="text-center py-10 px-4">
+    <h2 data-i18n="saveDate.title" id="save-date-title" class="text-3xl mb-6"></h2>
+    <div id="save-date-content"></div>
+  </section>
+
+  <section class="py-10 px-4">
+    <h2 data-i18n="rsvp.title.singular" id="rsvp-text" class="text-3xl text-center mb-4"></h2>
+    <form id="rsvp-form" autocomplete="off">
+      <input type="hidden" name="name" id="input-name" />    
+      <label>
+        <span data-i18n="form.attending"></span>
+        <select name="attending" id="attending-select" required>
+          <!-- Optionen werden dynamisch gesetzt -->
+        </select>
+      </label>
+    
+      <label id="who-label">
+        <span data-i18n="form.who"></span>
+        <select name="who" id="who-select">
+          <!-- Optionen werden dynamisch gesetzt -->
+        </select>
+      </label>
+    
+      <label>
+        <span data-i18n="form.allergies"></span>
+        <input id="allergies" name="allergies" type="text" placeholder="" />
+      </label>
+    
+      <button data-i18n="form.submit" type="submit"></button>
+    </form>    
+  </section>
+  <section class="py-12 px-4 text-center">
+  <h2 class="text-3xl mb-6">Dresscode</h2>
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto">
+    <img src="dresscode-1.jpg" alt="Dresscode 1" class="rounded-lg shadow-md object-cover w-full h-72 cursor-pointer" onclick="openModal(this.src)" />
+    <img src="dresscode-1.jpg" alt="Dresscode 2" class="rounded-lg shadow-md object-cover w-full h-72 cursor-pointer" onclick="openModal(this.src)" />
+    <img src="dresscode-1.jpg" alt="Dresscode 3" class="rounded-lg shadow-md object-cover w-full h-72 cursor-pointer" onclick="openModal(this.src)" />
+    <img src="dresscode-1.jpg" alt="Dresscode 4" class="rounded-lg shadow-md object-cover w-full h-72 cursor-pointer" onclick="openModal(this.src)" />
+  </div>
+</section>
+
+  <footer data-i18n="footer.copyright" class="text-center py-4 text-sm text-gray-500">
+  </footer>
+  
+  <div id="modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);justify-content:center;align-items:center;z-index:1000" onclick="this.style.display='none'">
+    <img id="modal-img" src="" style="max-width:90vw;max-height:90vh;border-radius:8px;box-shadow:0 0 10px black" />
+  </div>
+  
+  <script>
+    function changeLanguage(lang) {
+      const url = new URL(window.location.href);
+      url.searchParams.set('lang', lang); // Setzt oder ersetzt den "lang"-Parameter
+      window.location.href = url.toString(); // Lädt die Seite neu mit neuer URL
+    }
+
+    function getUrlParams() {
+      const params = {};
+      window.location.search.substring(1).split('&').forEach(pair => {
+        const [key, value] = pair.split('=');
+        if (key) params[key] = decodeURIComponent(value || '');
+      });
+      return params;
+    }
+
+    const params = getUrlParams();
+    const guestParam = params.guest || '';
+    const plusOneAllowed = params.plusone === '1';
+    const partnerParam = params.partner || '';
+    const lang = params.lang || 'de';
+    const kids = parseInt(params.kids, 10) || 0;
+
+    let partnerName = '';
+
+    const activeBtn = document.getElementById(`lang-${lang}`);
+    if (activeBtn) {
+      activeBtn.classList.add('border-blue-400', 'scale-110');
+    }
+
+    let guestCode = guestParam.charAt(0);
+    let guestName = decodeURIComponent(guestParam.slice(2).replace(/-/g, ' '));
+    const firstName = guestName.split(' ')[0];
+    document.getElementById("input-name").value = guestName;
+
+    const translations = {
+      de: {
+        "nav.greeting": "Willkommen zur Hochzeit",
+        "invitation.hello": "Lass uns feiern",
+        "invitation.greeting": "Wir laden dich herzlich zu unserer Hochzeit ein!",
+        "saveDate.title": "Save the date",
+        "austria": "Österreich",
+        "indonesia": "Indonesien",
+        "rsvp.title.singular": "Sag uns Bescheid",
+        "rsvp.title.plural": "Sagt uns Bescheid",
+        "form.attending": "Wirst du teilnehmen?",
+        "form.pleaseChoose": "Bitte wählen",
+        "form.yes": "Ja!",
+        "form.onlyAustria": "Nur in Österreich",
+        "form.onlyIndonesia": "Nur in Indonesien",
+        "form.yesToBoth": "Ja, auf beide Hochzeiten!",
+        "form.sorryNo": "Leider nicht",
+        "form.who": "Wer kommt?",
+        "form.who.onlyMe": "Nur ich",
+        "form.who.both": "Wir kommen beide",
+        "form.who.allThree": "Wir kommen zu dritt",
+        "form.who.allFour": "Wir kommen zu viert",
+        "form.who.allFive": "Wir kommen zu fünft",
+        "form.who.plusOne": "+1 - Ich bringe jemanden mit",
+        "form.allergies": "Allergien / Unverträglichkeiten",
+        "form.allergies.placeholder": "z.B. Nüsse, Laktose, etc.",
+        "form.submit": "Antwort absenden",
+        "faq.title": "Oft gestellte Fragen",
+        "footer.copyright": "© 2025 Patricia & Paul – Wir freuen uns auf euch!",
+        "and": "und",
+        "faq.id.question1": "[TODO] PUT QUESTION HERE",
+        "faq.id.answer1": "[TODO] PUT ANSWER HERE",
+        "faq.id.question2": "[TODO] PUT QUESTION HERE",
+        "faq.id.answer2": "[TODO] PUT ANSWER HERE",
+        "faq.id.question3": "[TODO] PUT QUESTION HERE",
+        "faq.id.answer3": "[TODO] PUT ANSWER HERE",
+        "faq.id.question4": "[TODO] PUT QUESTION HERE",
+        "faq.id.answer4": "[TODO] PUT ANSWER HERE",
+        "faq.id.question5": "[TODO] PUT QUESTION HERE",
+        "faq.id.answer5": "[TODO] PUT ANSWER HERE",
+        "faq.at.question1": "[TODO] PUT QUESTION HERE",
+        "faq.at.answer1": "[TODO] PUT ANSWER HERE",
+        "faq.at.question2": "[TODO] PUT QUESTION HERE",
+        "faq.at.answer2": "[TODO] PUT ANSWER HERE",
+        "faq.at.question3": "[TODO] PUT QUESTION HERE",
+        "faq.at.answer3": "[TODO] PUT ANSWER HERE",
+      },
+      en: {
+        "nav.greeting": "Welcome to the wedding",
+        "invitation.hello": "Celebrate with us",
+        "invitation.greeting": "We warmly invite you to our wedding!",
+        "saveDate.title": "Save the date",
+        "austria": "Austria",
+        "indonesia": "Indonesia",
+        "rsvp.title.singular": "Let us know",
+        "rsvp.title.plural": "Let us know",
+        "form.attending": "Will you attend?",
+        "form.pleaseChoose": "Please choose",
+        "form.yes": "Yes!",
+        "form.onlyAustria": "only to Austria",
+        "form.onlyIndonesia": "only to Indonesia",
+        "form.yesToBoth": "Yes, to both!",
+        "form.sorryNo": "Unfortunately not",
+        "form.who": "Who is coming?",
+        "form.who.onlyMe": "Only me",
+        "form.who.both": "We'll both come",
+        "form.who.allThree": "We'll be three",
+        "form.who.allFour": "We'll be four",
+        "form.who.allFive": "We'll be five",
+        "form.who.plusOne": "+1 - I'll bring someone",
+        "form.allergies": "Allergies / intolerances",
+        "form.allergies.placeholder": "e.g., nuts, lactose, ...",
+        "form.submit": "Send your answer",
+        "faq.title": "Frequently Asked Questions",
+        "footer.copyright": "© 2025 Patricia & Paul – We can't wait to celebrate with you!",
+        "and": "and",
+        "faq.id.question1": "[TODO] PUT QUESTION HERE",
+        "faq.id.answer1": "[TODO] PUT ANSWER HERE",
+        "faq.id.question2": "[TODO] PUT QUESTION HERE",
+        "faq.id.answer2": "[TODO] PUT ANSWER HERE",
+        "faq.id.question3": "[TODO] PUT QUESTION HERE",
+        "faq.id.answer3": "[TODO] PUT ANSWER HERE",
+        "faq.id.question4": "[TODO] PUT QUESTION HERE",
+        "faq.id.answer4": "[TODO] PUT ANSWER HERE",
+        "faq.id.question5": "[TODO] PUT QUESTION HERE",
+        "faq.id.answer5": "[TODO] PUT ANSWER HERE",
+        "faq.at.question1": "[TODO] PUT QUESTION HERE",
+        "faq.at.answer1": "[TODO] PUT ANSWER HERE",
+        "faq.at.question2": "[TODO] PUT QUESTION HERE",
+        "faq.at.answer2": "[TODO] PUT ANSWER HERE",
+        "faq.at.question3": "[TODO] PUT QUESTION HERE",
+        "faq.at.answer3": "[TODO] PUT ANSWER HERE"
+      },
+      id: {
+        "nav.greeting": "Selamat datang di pernikahan",
+        "invitation.hello": "Ayo rayakan bersama",
+        "invitation.greeting": "Kami mengundang Anda dengan hangat ke pernikahan kami!",
+        "saveDate.title": "Tandai tanggalnya",
+        "austria": "Austria",
+        "indonesia": "Indonesia",
+        "rsvp.title.singular": "Beri tahu kami",
+        "rsvp.title.plural": "Beri tahu kami",
+        "form.attending": "Apakah Anda akan datang?",
+        "form.pleaseChoose": "Silakan pilih",
+        "form.yes": "Ya!",
+        "form.onlyAustria": "Hanya di Austria",
+        "form.onlyIndonesia": "Hanya di Indonesia",
+        "form.yesToBoth": "Ya, di kedua lokasi!",
+        "form.sorryNo": "Sayangnya tidak",
+        "form.who": "Siapa saja yang akan datang?",
+        "form.who.onlyMe": "Hanya saya",
+        "form.who.both": "Kami berdua akan datang",
+        "form.who.allThree": "Kami bertiga akan datang",
+        "form.who.allFour": "Kami berempat akan datang",
+        "form.who.allFive": "Kami berlima akan datang",
+        "form.who.plusOne": "+1 - Saya akan membawa pasangan",
+        "form.allergies": "Alergi / intoleransi",
+        "form.allergies.placeholder": "contoh: kacang, laktosa, dll.",
+        "form.submit": "Kirim jawaban",
+        "faq.title": "Pertanyaan yang Sering Diajukan",
+        "footer.copyright": "© 2025 Patricia & Paul – Kami tidak sabar untuk merayakan bersama Anda!",
+        "and": "dan",
+        "faq.id.question1": "[TODO] PUT QUESTION HERE",
+        "faq.id.answer1": "[TODO] PUT ANSWER HERE",
+        "faq.id.question2": "[TODO] PUT QUESTION HERE",
+        "faq.id.answer2": "[TODO] PUT ANSWER HERE",
+        "faq.id.question3": "[TODO] PUT QUESTION HERE",
+        "faq.id.answer3": "[TODO] PUT ANSWER HERE",
+        "faq.id.question4": "[TODO] PUT QUESTION HERE",
+        "faq.id.answer4": "[TODO] PUT ANSWER HERE",
+        "faq.id.question5": "[TODO] PUT QUESTION HERE",
+        "faq.id.answer5": "[TODO] PUT ANSWER HERE",
+        "faq.at.question1": "[TODO] PUT QUESTION HERE",
+        "faq.at.answer1": "[TODO] PUT ANSWER HERE",
+        "faq.at.question2": "[TODO] PUT QUESTION HERE",
+        "faq.at.answer2": "[TODO] PUT ANSWER HERE",
+        "faq.at.question3": "[TODO] PUT QUESTION HERE",
+        "faq.at.answer3": "[TODO] PUT ANSWER HERE"
+      }
+    };
+
+    const text = translations[lang];
+
+    const data = {
+      at: `<div class="card">
+        <img src="gartenhochzeit.jpg" alt="Gartenhochzeit" class="w-full h-auto rounded-t-xl" onclick="openModal(this.src)" />
+      </div>
+        <h2 data-i18n="faq.title"></h2>
+      <div class="card">
+        <div class="faq-question">${text["faq.at.question1"]}</div>
+        <div class="faq-answer">${text["faq.at.answer1"]}</div>
+      </div>
+      <div class="card">
+        <div class="faq-question">${text["faq.at.question2"]}</div>
+        <div class="faq-answer">${text["faq.at.answer2"]}</div>
+      </div>
+      <div class="card">
+        <div class="faq-question">${text["faq.at.question3"]}</div>
+        <div class="faq-answer">${text["faq.at.answer3"]}</div>
+      </div>`,
+
+      id: `<div class="card">
+        <h3>Strandhochzeit</h3>
+        <p><strong>Wann:</strong> 04.08.2027</p>
+        <p><strong>Wo:</strong> Ancol Beach, Jakarta</p>
+        <p><strong>Dresscode:</strong> siehe unten</p>
+        <p><strong>Beginn:</strong> 16:00 Uhr</p>
+      </div>
+      <div class="card" style="margin-top:1rem;">
+        <h4>Hotel &amp; Anreise</h4>
+        <p><strong>Hotelname:</strong> Bali Beach Resort</p>
+        <p><strong>Adresse:</strong> Jalan Pantai, Bali, Indonesien</p>
+        <p><strong>Anreise:</strong> Vom Flughafen Bali mit dem Taxi ca. 30 Minuten</p>
+      </div>
+      <h2 data-i18n="faq.title"></h2>
+      <div class="card">
+        <div class="faq-question">${text["faq.id.question1"]}</div>
+        <div class="faq-answer">${text["faq.id.answer1"]}</div>
+      </div>
+      <div class="card">
+        <div class="faq-question">${text["faq.id.question2"]}</div>
+        <div class="faq-answer">${text["faq.id.answer2"]}</div>
+      </div>
+      <div class="card">
+        <div class="faq-question">${text["faq.id.question3"]}</div>
+        <div class="faq-answer">${text["faq.id.answer3"]}</div>
+      </div>
+      <div class="card">
+        <div class="faq-question">${text["faq.id.question4"]}</div>
+        <div class="faq-answer">${text["faq.id.answer4"]}</div>
+      </div>`
+    };
+
+    const locationContainer = document.getElementById("save-date-content");
+    const attendingSelect = document.querySelector("select[name='attending']");
+    const plusOneLabel = document.getElementById("plusone-label");
+
+    function setupTabs() {
+      const tabButtons = document.querySelectorAll(".tab-button");
+      const tabContents = document.querySelectorAll(".tab-content");
+      tabButtons.forEach(btn => {
+        btn.addEventListener("click", () => {
+          tabButtons.forEach(b => b.classList.remove("active"));
+          tabContents.forEach(c => c.classList.remove("active"));
+          btn.classList.add("active");
+          document.getElementById(`tab-${btn.dataset.tab}`).classList.add("active");
+        });
+      });
+    }
+
+    if (guestCode === '1') {
+      locationContainer.innerHTML = data.at;
+      attendingSelect.value = 'AT';
+    } else if (guestCode === '2') {
+      locationContainer.innerHTML = data.id + data.hotelCard;
+      attendingSelect.value = 'ID';
+    } else {
+      locationContainer.innerHTML = `
+        <div class="tab-buttons">
+          <button class="tab-button active" data-tab="at">${text["austria"]}</button>
+          <button class="tab-button" data-tab="id">${text["indonesia"]}</button>
+        </div>
+        <div id="tab-at" class="tab-content active">${data.at}</div>
+        <div id="tab-id" class="tab-content">${data.id}</div>
+      `;
+      setupTabs();
+      attendingSelect.value = 'BOTH';
+    }
+
+    const selectAttending = document.getElementById("attending-select");
+    // Optionen definieren
+    let optionsAttending = [{ value: "", text: text["form.pleaseChoose"] }];
+
+    if (guestCode === '1' || guestCode === '2') {
+      optionsAttending.push(
+        { value: guestCode === '1' ? "AT" : "ID", text: text["form.yes"] });
+    } else if (guestCode === '3') {
+      optionsAttending.push(
+        { value: "AT", text: text["form.onlyAustria"] },
+        { value: "ID", text: text["form.onlyIndonesia"] },
+        { value: "BOTH", text:  text["form.yesToBoth"] }
+      );
+    }
+
+    optionsAttending.push({ value: "NO", text: text["form.sorryNo"] });
+
+    // Optionen ins Select einfügen
+    optionsAttending.forEach(opt => {
+      const o = document.createElement("option");
+      o.value = opt.value;
+      o.textContent = opt.text;
+      selectAttending.appendChild(o);
+    });
+
+    // Partner/Begleitperson-Code
+    const selectWho = document.getElementById("who-select");
+    // Optionen definieren
+    let optionsWho = [{ value: "", text: text["form.pleaseChoose"] }];
+
+    optionsWho.push({ value: "only_guest", text: `${text["form.who.onlyMe"]} (${firstName})` });
+    if (plusOneAllowed) {
+      optionsWho.push({ value: 'guest_plus_one', text: text["form.who.plusOne"] });
+    } else if (partnerParam) {
+      optionsWho.push({ value: "guest_plus_partner", text: text["form.who.both"] });
+    }
+    
+    if (kids > 0) {
+      if(kids === 1) { 
+        optionsWho.push({ value: "both_plus_one_kid", text: "Wir kommen zu dritt" });
+      } else if(kids === 2) {
+        optionsWho.push({ value: "both_plus_two_kids", text: "Wir kommen zu viert" });
+      } else if(kids === 3) {
+        optionsWho.push({ value: "both_plus_two_kids", text: "Wir kommen zu fünft" });
+      }
+    }
+
+    optionsWho.push({ value: "NO", text: text["form.sorryNo"] });
+
+    // Optionen ins Select einfügen
+    optionsWho.forEach(opt => {
+      const o = document.createElement("option");
+      o.value = opt.value;
+      o.textContent = opt.text;
+      selectWho.appendChild(o);
+    });
+
+    document.getElementById("allergies").placeholder = text["form.allergies.placeholder"];
+
+    if(!plusOneAllowed && partnerParam === '')
+    {
+      selectWho.value = "only_guest"
+      document.getElementById("who-label").style.display = 'none';
+    }
+
+    document.getElementById("rsvp-form").addEventListener("submit", async function(e) {
+      e.preventDefault();
+      const form = e.target;
+      const dataToSend = {
+        name: form.name.value,
+        attending: form.attending.value,
+        who: form.who.value,
+        allergies: form.allergies.value,
+        guestMode: guestCode
+      };
+      try {
+        await fetch("https://script.google.com/macros/s/AKfycbz0Bzgs9h9I6kJmvBpSc3IBRTQcamzzj0GpYuOB_tz4q3cMXu86e3GxViPJ2cIdkf8pMQ/exec", {
+          method: "POST",
+          mode: "no-cors",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(dataToSend)
+        });
+        const successCard = document.createElement("div");
+        successCard.className = "card text-center mt-4";
+        successCard.innerHTML = "<h3>Danke für deine Rückmeldung!</h3>";
+        form.replaceWith(successCard);
+        form.reset();
+      } catch (error) {
+        alert("Fehler beim Absenden. Bitte versuche es später erneut.");
+      }
+    });
+
+  document.querySelectorAll(".faq-question").forEach(q => {
+      q.addEventListener("click", () => {
+        q.classList.toggle("open");
+      });
+    });
+
+  // Modal
+  function openModal(src) {
+    const modal = document.getElementById("modal");
+    const img = document.getElementById("modal-img");
+    img.src = src;
+    modal.style.display = "flex";
+  }
+
+  function translatePage(lang) {
+    const dict = translations[lang] || translations["de"];
+    document.querySelectorAll("[data-i18n]").forEach(el => {
+      const key = el.getAttribute("data-i18n");
+      if (dict[key]) el.innerText = dict[key];
+    });
+
+    if(partnerParam) { 
+      partnerName = decodeURIComponent(partnerParam.replace(/-/g, ' '));
+      const partnerFirstName = partnerName.split(' ')[0];
+        document.getElementById("rsvp-text").innerText = `${text["rsvp.title.plural"]}, ${firstName} ` + dict["and"] + ` ${partnerFirstName}`;
+        document.getElementById("invitation").innerText += `, ${firstName} ` + dict["and"] + ` ${partnerFirstName}!`;
+    } else {    
+      document.getElementById("rsvp-text").innerText += `, ${firstName}`;
+      document.getElementById("invitation").innerText += `, ${firstName}!`;
+    }
+
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    translatePage(lang);
+  });
+  </script>
+</body>
+</html>
+ 

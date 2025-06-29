@@ -7,6 +7,11 @@
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2280%22>💍</text></svg>">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Lato&display=swap" rel="stylesheet" />
   <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: false
+    }
+  </script>
   <style>
     :root {
       --primary: #590b18;    
@@ -206,7 +211,7 @@
   </nav>  
   <section class="text-center py-10 px-4" style="background-color: var(--accent); color: var(--primary);">
     <h1 data-i18n="invitation.hello" id="invitation" class="text-4xl md:text-5xl mb-4"></h1>
-    <p data-i18n="invitation.greeting" class="text-lg md:text-xl mb-6"></p>
+    <p data-i18n="invitation.greeting.singular" id="invitation.greeting" class="text-lg md:text-xl mb-6"></p>
     <img src="foto-1.jpg" alt="Paarfoto" class="mx-auto rounded-2xl shadow-lg max-w-md w-full max-w-[90%] sm:max-w-md border border-[var(--accent)]" onclick="openModal(this.src)" />
   </section>
 
@@ -234,7 +239,7 @@
       </label>
     
       <label>
-        <span data-i18n="form.allergies"></span>
+        <span id="allergies-label" data-i18n="form.allergies"></span>
         <input id="allergies" name="allergies" type="text" placeholder="" />
       </label>
     
@@ -297,7 +302,8 @@
       de: {
         "nav.greeting": "Willkommen zur Hochzeit",
         "invitation.hello": "Lass uns feiern",
-        "invitation.greeting": "Wir laden dich herzlich zu unserer Hochzeit ein!",
+        "invitation.greeting.singular": "Wir laden dich herzlich zu unserer Hochzeit ein!",
+        "invitation.greeting.plural": "Wir laden euch herzlich zu unserer Hochzeit ein!",
         "saveDate.title": "Save the date",
         "austria": "Österreich",
         "indonesia": "Indonesien",
@@ -308,7 +314,7 @@
         "form.yes": "Ja!",
         "form.onlyAustria": "Nur in Österreich",
         "form.onlyIndonesia": "Nur in Indonesien",
-        "form.yesToBoth": "Ja, auf beide Hochzeiten!",
+        "form.yesToBoth": "Ja, auf beiden Hochzeiten!",
         "form.sorryNo": "Leider nicht",
         "form.who": "Wer kommt?",
         "form.who.onlyMe": "Nur ich",
@@ -343,7 +349,8 @@
       en: {
         "nav.greeting": "Welcome to the wedding",
         "invitation.hello": "Celebrate with us",
-        "invitation.greeting": "We warmly invite you to our wedding!",
+        "invitation.greeting.singular": "We warmly invite you to our wedding!",
+        "invitation.greeting.plural": "We warmly invite you to our wedding!",
         "saveDate.title": "Save the date",
         "austria": "Austria",
         "indonesia": "Indonesia",
@@ -389,7 +396,8 @@
       id: {
         "nav.greeting": "Selamat datang di pernikahan",
         "invitation.hello": "Ayo rayakan bersama",
-        "invitation.greeting": "Kami mengundang Anda dengan hangat ke pernikahan kami!",
+        "invitation.greeting.singular": "Kami mengundang Anda dengan hangat ke pernikahan kami!",
+        "invitation.greeting.plural": "Kami mengundang Anda dengan hangat ke pernikahan kami!",
         "saveDate.title": "Tandai tanggalnya",
         "austria": "Austria",
         "indonesia": "Indonesia",
@@ -547,6 +555,25 @@
       selectAttending.appendChild(o);
     });
 
+    selectAttending.addEventListener("change", function () {
+      const whoLabel = document.getElementById("who-label");
+      const whoSelect = document.getElementById("who-select");
+      const allergiesLabel = document.getElementById("allergies-label");
+      const allergiesInput = document.getElementById("allergies");
+
+      if (this.value === "NO") {
+        whoSelect.style.display = "none";
+        whoLabel.style.display = "none";
+        allergiesLabel.style.display = "none";
+        allergiesInput.style.display = "none";
+      } else {
+        whoSelect.style.display = "";
+        whoLabel.style.display = "";
+        allergiesLabel.style.display = "";
+        allergiesInput.style.display = "";
+      }
+    });
+
     // Partner/Begleitperson-Code
     const selectWho = document.getElementById("who-select");
     // Optionen definieren
@@ -640,6 +667,7 @@
       const partnerFirstName = partnerName.split(' ')[0];
         document.getElementById("rsvp-text").innerText = `${text["rsvp.title.plural"]}, ${firstName} ` + dict["and"] + ` ${partnerFirstName}`;
         document.getElementById("invitation").innerText += `, ${firstName} ` + dict["and"] + ` ${partnerFirstName}!`;
+        document.getElementById("invitation.greeting").innerText = `${text["invitation.greeting.plural"]}`;
     } else {    
       document.getElementById("rsvp-text").innerText += `, ${firstName}`;
       document.getElementById("invitation").innerText += `, ${firstName}!`;

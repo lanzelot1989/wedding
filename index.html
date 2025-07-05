@@ -246,7 +246,6 @@
   }
 
   .text-area {
-    flex: 1;
     padding-left: 1rem;
   }
 
@@ -260,6 +259,10 @@
     margin-top: 0.25rem;
     color: var(--accent) !important;
     font-size: 0.95rem;
+  }
+
+  #homiemoon label {
+    padding-left: 1rem; /* Oder 2.5rem, je nach gewünschtem Abstand */
   }
   </style>
   
@@ -292,7 +295,7 @@
     <p data-i18n="invitation.greeting.singular" id="invitation.greeting" class="text-lg md:text-xl mb-6"></p>
   </section>
   <section id="save-date" class="text-center py-10 px-4">
-    <img src="background-flowers1.png" alt="Blumenhintergrund" class="mx-auto rounded-2xl shadow-lg max-w-md w-full max-w-[90%] sm:max-w-md fade-slide" />
+    <img src="background-flowers2.png" alt="Blumenhintergrund" class="mx-auto rounded-2xl max-w-md w-full max-w-[90%] sm:max-w-md fade-slide" />
     <h1 class="save-date fade-slide text-center" data-i18n="saveDate.title"></h1>
     <div id="save-date-content"></div>
   </section>
@@ -319,11 +322,28 @@
         <span id="allergies-label" data-i18n="form.allergies"></span>
         <input id="allergies" name="allergies" type="text" placeholder="" />
       </label>
-    
+      
+      <fieldset id="homiemoon">
+        <span data-i18n="form.homiemoon.question"></span>
+        <label class="block mb-2">
+          <input type="checkbox" name="homiemoon[]" value="gili" />
+          <span data-i18n="form.homiemoon.option.gili"></span>
+        </label>
+        <label class="block mb-2">
+          <input type="checkbox" name="homiemoon[]" value="lembongan" />
+          <span data-i18n="form.homiemoon.option.lembongan"></span>
+        </label>
+        <label class="block mb-2">
+          <input type="checkbox" name="homiemoon[]" value="komodo" />
+          <span data-i18n="form.homiemoon.option.komodo"></span>
+        </label>
+      </fieldset>
+
       <button data-i18n="form.submit" type="submit"></button>
     </form>    
   </section>
   <section class="py-12 px-4 text-center">
+    <img src="background-flowers2.png" alt="Blumenhintergrund" class="mx-auto rounded-2xl max-w-md w-full max-w-[90%] sm:max-w-md fade-slide" />
     <h2 class="text-3xl mb-6" data-i18n="dresscode"></h2>
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto">
       <img src="dresscode-1.jpg" alt="Dresscode 1" class="rounded-lg shadow-md object-cover w-full h-72 cursor-pointer" onclick="openModal(this.src)" />
@@ -344,6 +364,7 @@
       <div class="text-area text-left w-2/3">
         <h3 class="text-xl font-semibold mb-2" data-i18n="fotos"></h3>
         <p class="text-gray-600" data-i18n="fotos.upload"></p>
+        <a class="text-gray-600" href="https://photos.google.com" data-i18n="fotos.uploadlink"></a>
       </div>
     </div>
   </section>
@@ -387,6 +408,7 @@
     const guestParam = params.guest || '';
     const plusOneAllowed = params.plusone === '1';
     const partnerParam = params.partner || '';
+    const homiemoonParam = params.homiemoon || '0';
     const lang = params.lang || 'de';
     const kids = parseInt(params.kids, 10) || 0;
 
@@ -432,19 +454,33 @@
         "form.allergies": "Allergien / Unverträglichkeiten",
         "form.allergies.placeholder": "z.B. Nüsse, Laktose, etc.",
         "form.submit": "Antwort absenden",
+        "form.success": "Danke für deine Rückmeldung!",
         "faq.title": "Oft gestellte Fragen",
         "footer.copyright": "© 2025 Patricia & Paul – Wir freuen uns auf euch!",
         "and": "und",
+        "date.austria": "4. August 2026",
+        "date.indonesia": "4. August 2027",
         "wallhof": "Wallhof",
         "wallhof.address": "Doppl 16, 4311 Schwertberg",
         "wallhof.start": "Beginn: 13:30",
+        "jakarta": "Jakarta",
+        "jakarta.address": "TBD, Indonesia",
+        "jakarta.start": "Beginn: 13:30",
         "dresscode": "Dresscode",
         "agenda": "Agenda",
         "agenda.comingsoon": "Die Agenda der Hochzeit wird zwei Monate vorher hier zu finden sein.",
         "fotos": "Fotos hochladen",
-        "fotos.upload": "Teilt eure Bilder in diesem gemeinsamen Album. Während der Trauung bitten wir euch, die Aufnahmen unserem Fotografen zu überlassen, geniesst den Moment mit uns.",
+        "fotos.upload": "Teilt eure Bilder bitte in diesem gemeinsamen Album. Die Trauung hält unser Fotograf fest – genießt den Moment mit uns.",
+        "fotos.uploadlink": "Hier geht es zum Album",
         "presents": "Geschenkswünsche",
         "presents.cashplease": "Das Kommen unserer Gäste ist das schönste Geschenk. Wer dennoch eine Freude machen möchte, darf sehr gern zur Hochzeitskasse beitragen.",
+        "homiemoon": "Homie-Moon",
+        "homiemoon.description": "Wir planen nach der Hochzeit einen kleinen gemeinsamen Trip mit euch (max. 4 Tage) – unseren Homie‑moon.",
+        "homiemoon.cont": "Ob wir zusammen entspannen, schnorcheln,  ein paar Tage auf einem Boot verbringen oder einfach gut essen – das hängt davon ab, worauf ihr Lust habt. Bitte gebt uns Bescheid, ob ihr dabei wärt - dann können wir etwas Passendes planen. Wichtig: Das Ganze ist natürlich völlig freiwillig – ihr müsst euch zu nichts verpflichtet fühlen. Wenn es für euch nicht passt, ist das absolut okay und wir freuen uns trotzdem riesig, euch bei der Hochzeit dabeizuhaben.",
+        "form.homiemoon.question": "Wärst du bei einem Homie-Moon dabei?",
+        "form.homiemoon.option.gili": "Schnorcheln und Baden auf den Gilli Islands (Flug über Lombok + Boot)",
+        "form.homiemoon.option.lembongan": "Island-life auf Nusa Lembongan (Flug über Bali + Boot)",
+        "form.homiemoon.option.komodo": "Ein paar Nächte auf einem Boot in Flores/Komodo (Flug)",
         "faq.id.question1": "[TODO] PUT QUESTION HERE",
         "faq.id.answer1": "[TODO] PUT ANSWER HERE",
         "faq.id.question2": "[TODO] PUT QUESTION HERE",
@@ -491,19 +527,33 @@
         "form.allergies": "Allergies / intolerances",
         "form.allergies.placeholder": "e.g., nuts, lactose, ...",
         "form.submit": "Send your answer",
+        "form.success": "Thank you for your feedback!",
         "faq.title": "Frequently Asked Questions",
         "footer.copyright": "© 2025 Patricia & Paul – We can't wait to celebrate with you!",
         "and": "and",
+        "date.austria": "August 4, 2026",
+        "date.indonesia": "August 4, 2027",
         "wallhof": "Wallhof",
         "wallhof.address": "Doppl 16, 4311 Schwertberg",
         "wallhof.start": "Start: 1:30 PM",
+        "jakarta": "Jakarta",
+        "jakarta.address": "TBD, Indonesia",
+        "jakarta.start": "Start: 1:30 PM",
         "dresscode": "Dresscode",
         "agenda": "Agenda",
         "agenda.comingsoon": "The wedding agenda will be available here two months in advance.",
         "fotos": "Upload Photos",
-        "fotos.upload": "Share your pictures in this shared album. During the ceremony, we kindly ask you to leave the photography to our photographer and enjoy the moment with us.",
+        "fotos.upload": "Please share your photos in this shared album. Solely our photographer will capture the ceremonial part – enjoy the moment with us.",
+        "fotos.uplodalink": "Follow this link",
         "presents": "Gift Wishes",
-        "presents.cashplease": "The presence of our guests is the greatest gift. Should you wish to give something more, a contribution to our wedding fund would be warmly appreciated.",
+        "presents.cashplease": "The presence of our guests is the greatest gift. Should you wish to give something more, our wedding fund would warmly appreciate it.",
+        "homiemoon": "Homie‑Moon",
+        "homiemoon.description": "After the wedding, we're planning a small trip with you (max. 4 days) – our Homie‑Moon.",
+        "homiemoon.cont": "Whether we relax together, go snorkeling, spend a few days on a boat, or simply enjoy good food – it depends on what you feel like. Let us know if you'd be in – then we can plan something that fits. Important: This is of course completely optional – no pressure at all. If it doesn't work out for you, that's totally fine – we're still super happy to have you at the wedding!",
+        "form.homiemoon.question": "Would you join the Homie‑Moon?",
+        "form.homiemoon.option.gili": "Snorkeling and swimming at the Gili Islands (flight via Lombok + boat)",
+        "form.homiemoon.option.lembongan": "Island life on Nusa Lembongan (flight via Bali + boat)",
+        "form.homiemoon.option.komodo": "A few nights on a boat in Flores/Komodo (flight)",
         "faq.id.question1": "[TODO] PUT QUESTION HERE",
         "faq.id.answer1": "[TODO] PUT ANSWER HERE",
         "faq.id.question2": "[TODO] PUT QUESTION HERE",
@@ -550,19 +600,33 @@
         "form.allergies": "Alergi / intoleransi",
         "form.allergies.placeholder": "contoh: kacang, laktosa, dll.",
         "form.submit": "Kirim jawaban",
+        "form.success": "Terima kasih atas tanggapanmu!",
         "faq.title": "Pertanyaan yang Sering Diajukan",
         "footer.copyright": "© 2025 Patricia & Paul – Kami tidak sabar untuk merayakan bersama Anda!",
         "and": "dan",
+        "date.austria": "4 Agustus 2026",
+        "date.indonesia": "4 Agustus 2027",
         "wallhof": "Wallhof",
         "wallhof.address": "Doppl 16, 4311 Schwertberg",
         "wallhof.start": "Mulai: 13:30",
+        "jakarta": "Jakarta",
+        "jakarta.address": "Akan ditentukan, Indonesia",
+        "jakarta.start": "Mulai: 13.30",
         "dresscode": "Kode Busana",
         "agenda": "Agenda",
         "agenda.comingsoon": "Agenda pernikahan akan tersedia di sini dua bulan sebelumnya.",
         "fotos": "Unggah Foto",
-        "fotos.upload": "Bagikan foto-foto kalian di album bersama ini. Saat upacara berlangsung, mohon serahkan pengambilan gambar kepada fotografer kami dan nikmati momen bersama kami.",
+        "fotos.upload": "Silakan unggah foto kalian di album bersama ini. Upacara akan diabadikan oleh fotografer kami – nikmatilah momen ini bersama kami.",
+        "fotos.uploadlink": "Klik di sini untuk membuka album",
         "presents": "Keinginan Hadiah",
         "presents.cashplease": "Kehadiran para tamu adalah hadiah terindah bagi kami. Namun jika ingin memberi lebih, kontribusi untuk dana pernikahan akan sangat kami hargai.",
+        "homiemoon": "Homie‑Moon",
+        "homiemoon.description": "Setelah pernikahan, kami berencana liburan kecil bersama kalian (maks. 4 hari) – Homie‑Moon kami.",
+        "homiemoon.cont": "Mau bersantai, snorkeling, menginap di kapal beberapa hari, atau sekadar makan enak – semuanya tergantung minat kalian. Beri tahu kami jika kalian tertarik – agar kami bisa merencanakan yang cocok. Penting: Ini tentu saja sepenuhnya sukarela – tidak ada kewajiban sama sekali. Kalau kalian tidak bisa ikut, tidak masalah – kami tetap sangat senang kalian hadir di pernikahan!",
+        "form.homiemoon.question": "Apakah kamu tertarik ikut Homie‑Moon?",
+        "form.homiemoon.option.gili": "Snorkeling dan berenang di Gili Islands (terbang via Lombok + kapal)",
+        "form.homiemoon.option.lembongan": "Island life di Nusa Lembongan (terbang via Bali + kapal)",
+        "form.homiemoon.option.komodo": "Beberapa malam di atas kapal di Flores/Komodo (terbang)",
         "faq.id.question1": "[TODO] PUT QUESTION HERE",
         "faq.id.answer1": "[TODO] PUT ANSWER HERE",
         "faq.id.question2": "[TODO] PUT QUESTION HERE",
@@ -586,7 +650,7 @@
 
     const data = {
       at: `<div class="card">
-        <p class="text-center text-3xl">04. August 2026</p>
+        <p class="text-center text-3xl" data-i18n="date.austria"></p>
         </div>
         <div class="iconcard mx-auto w-full max-w-[90%] sm:max-w-md">
           <div class="icon-area flex-shrink-0 w-1/3 flex justify-center">
@@ -609,18 +673,37 @@
         </div>`,
 
       id: `<div class="card">
-        <h3>Strandhochzeit</h3>
-        <p><strong>Wann:</strong> 04.08.2027</p>
-        <p><strong>Wo:</strong> Ancol Beach, Jakarta</p>
-        <p><strong>Dresscode:</strong> siehe unten</p>
-        <p><strong>Beginn:</strong> 16:00 Uhr</p>
-      </div>
-      <div class="card" style="margin-top:1rem;">
-        <h4>Hotel &amp; Anreise</h4>
-        <p><strong>Hotelname:</strong> Bali Beach Resort</p>
-        <p><strong>Adresse:</strong> Jalan Pantai, Bali, Indonesien</p>
-        <p><strong>Anreise:</strong> Vom Flughafen Bali mit dem Taxi ca. 30 Minuten</p>
-      </div>`
+        <p class="text-center text-3xl" data-i18n="date.indonesia"></p>
+        </div>
+        <div class="iconcard mx-auto w-full max-w-[90%] sm:max-w-md">
+          <div class="icon-area flex-shrink-0 w-1/3 flex justify-center">
+            <img src="icon-beach.png" alt="Icon" class="h-[80%] rounded-full object-contain" />
+          </div>
+          <div class="text-area text-left w-2/3">
+            <h3 class="text-xl font-semibold mb-2" data-i18n="jakarta"></h3>
+            <p class="text-gray-600" data-i18n="jakarta.address"></p>
+            <p class="text-gray-600" data-i18n="jakarta.start"></p>
+          </div>
+        </div>
+        <div class="iconcard mx-auto w-full max-w-[90%] sm:max-w-md">
+          <div class="icon-area flex-shrink-0 w-1/3 flex justify-center">
+            <img src="icon-rings.png" alt="Icon" class="h-[80%] rounded-full object-contain" />
+          </div>
+          <div class="text-area text-left w-2/3">
+            <h3 class="text-xl font-semibold mb-2" data-i18n="agenda"></h3>
+            <p class="text-gray-600" data-i18n="agenda.comingsoon"></p>
+          </div>
+        </div>
+        <div id="homiemoon-card" class="iconcard mx-auto w-full max-w-[90%] sm:max-w-md">
+          <div class="icon-area flex-shrink-0 w-1/3 flex justify-center">
+            <img src="icon-homiemoon.png" alt="Icon" class="h-[80%] rounded-full object-contain" />
+          </div>
+          <div class="text-area text-left w-2/3">
+            <h3 class="text-xl font-semibold mb-2" data-i18n="homiemoon"></h3>
+            <p class="text-gray-600" data-i18n="homiemoon.description"></p>
+          </div>
+        </div><p id="homiemoon-text" data-i18n="homiemoon.cont"></p>
+`
     };
 
     const faq = {
@@ -692,13 +775,22 @@
       });
     }
 
+    const homiemoon = document.getElementById("homiemoon");
+
     if (guestCode === '1') {
       locationContainer.innerHTML = data.at;
+      homiemoon.style.display = "none";
       attendingSelect.value = 'AT';
     } else if (guestCode === '2') {
-      locationContainer.innerHTML = data.id + data.hotelCard;
+      locationContainer.innerHTML = data.id;
+      if(homiemoonParam == '0') {
+        homiemoon.style.display = "none";
+      }
       attendingSelect.value = 'ID';
     } else {
+      if(homiemoonParam == '0') {
+        homiemoon.style.display = "none";
+      }
       locationContainer.innerHTML = `
         <div class="tab-buttons">
           <button class="tab-button active" data-tab="at">${text["austria"]}</button>
@@ -741,17 +833,31 @@
       const whoSelect = document.getElementById("who-select");
       const allergiesLabel = document.getElementById("allergies-label");
       const allergiesInput = document.getElementById("allergies");
+      const homiemoon = document.getElementById("homiemoon");
+
 
       if (this.value === "NO") {
         whoSelect.style.display = "none";
         whoLabel.style.display = "none";
         allergiesLabel.style.display = "none";
         allergiesInput.style.display = "none";
-      } else {
+        homiemoon.style.display = "none";
+
+      } else if (this.value ==="AT") {
         whoSelect.style.display = "";
         whoLabel.style.display = "";
         allergiesLabel.style.display = "";
         allergiesInput.style.display = "";
+        homiemoon.style.display = "none";
+      }
+      else {
+        whoSelect.style.display = "";
+        whoLabel.style.display = "";
+        allergiesLabel.style.display = "";
+        allergiesInput.style.display = "";
+        if(guestCode != "1" && homiemoonParam == '1') {
+          homiemoon.style.display = "";
+        }
       }
     });
 
@@ -796,15 +902,19 @@
     document.getElementById("rsvp-form").addEventListener("submit", async function(e) {
       e.preventDefault();
       const form = e.target;
+      const homiemoonSelections = Array.from(
+          form.querySelectorAll('input[name="homiemoon[]"]:checked')
+        ).map(cb => cb.value);
       const dataToSend = {
         name: form.name.value,
         attending: form.attending.value,
         who: form.who.value,
         allergies: form.allergies.value,
-        guestMode: guestCode
+        guestMode: guestCode,
+        homiemoon: homiemoonSelections
       };
       try {
-        await fetch("https://script.google.com/macros/s/AKfycbz0Bzgs9h9I6kJmvBpSc3IBRTQcamzzj0GpYuOB_tz4q3cMXu86e3GxViPJ2cIdkf8pMQ/exec", {
+        await fetch("https://script.google.com/macros/s/AKfycbwQTLNstqdPFSsl1JJlh_TTz8dlwUEx8T6Auraww7sBHcHjjD4Y2amXKwUqtXDzVcOlRA/exec", {
           method: "POST",
           mode: "no-cors",
           headers: { "Content-Type": "application/json" },

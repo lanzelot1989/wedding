@@ -153,133 +153,140 @@
     background-color: var(--primary);
     }
 
-  .faq-question {
-    font-weight: 600;
-    color: var(--accent);
-    user-select: none;
-    position: relative;
-    padding-right: 1.5rem;
-  }
+    .faq-item {
+      border: 2px solid var(--accent);
+      border-radius: 0.75rem;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      background-color: transparent;
+    }
 
-  /* Pfeil nach rechts/unten */
-  .faq-question::after {
-    content: "▶";
-    position: absolute;
-    right: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    transition: transform 0.3s ease;
-    color: var(--accent);
-  }
+    .faq-question {
+      font-weight: 600;
+      color: var(--accent);
+      user-select: none;
+      position: relative;
+      padding-right: 1.5rem;
+    }
 
-  .faq-question.open::after {
-    transform: translateY(-50%) rotate(90deg);
-  }
+    /* Pfeil nach rechts/unten */
+    .faq-question::after {
+      content: "▸";
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      transition: transform 0.3s ease;
+      color: var(--accent);
+    }
 
-  .faq-answer {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.3s ease, padding 0.3s ease;
-    color: var(--accent);
-    padding-top: 0;
-  }
+    .faq-question.open::after {
+      transform: translateY(-50%) rotate(90deg);
+    }
 
-  .faq-question.open + .faq-answer {
-    max-height: 900px; /* groß genug für Inhalt */
-    padding-top: 0.5rem;
-  }
+    .faq-answer {
+      display: none;
+      padding-top: 0;
+      color: var(--accent);
+      transition: all 0.3s ease;
+    }
 
-  .faq-answer a {
-    color: var(--accent, blue);
-    text-decoration: underline;
-    font-weight: 500;
-  }
+    .faq-question.open + .faq-answer {
+      display: block;
+      padding-top: 0.5rem;
+    }
 
-  .faq-answer ul {
-    list-style-type: disc;
-    padding-left: 1.5rem;
-    margin-top: 0.5rem;
-  }
+    .faq-answer a {
+      color: var(--accent, blue);
+      text-decoration: underline;
+      font-weight: 500;
+    }
 
-  .faq-answer li {
-    margin-bottom: 0.3rem;
-  }
+    .faq-answer ul {
+      list-style-type: disc;
+      padding-left: 1.5rem;
+      margin-top: 0.5rem;
+    }
 
-  .save-date {
-    font-family: 'Imperial Script', cursive;
-    font-size: 5.5rem;
-    color: var(--accent) !important;
-  }
+    .faq-answer li {
+      margin-bottom: 0.3rem;
+    }
 
-  .save-date {
-    font-family: 'Imperial Script', cursive;
-    font-size: 5.5rem;
-    color: var(--accent) !important;
-  }
+    .save-date {
+      font-family: 'Imperial Script', cursive;
+      font-size: 5.5rem;
+      color: var(--accent) !important;
+    }
 
-  .fade-slide {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 3s ease-out, transform 3s ease-out;
-  }
+    .save-date {
+      font-family: 'Imperial Script', cursive;
+      font-size: 5.5rem;
+      color: var(--accent) !important;
+    }
 
-  .fade-slide.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
+    .fade-slide {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 3s ease-out, transform 3s ease-out;
+    }
 
-  .iconcard {
-    display: flex;
-    align-items: center;
-    border-radius: 0rem;
-    box-shadow: none;
-    overflow: hidden;
-    height: 160px;
-    max-width: 600px;
-    padding: 0;        /* Kein Innenabstand */
-    margin: 0;         /* Kein Außenabstand */
-    border: none;      /* Kein Rahmen */
-    background: none;  /* Kein Hintergrund */
-  }
+    .fade-slide.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
 
-  .icon-area {
-    flex: 0 0 33%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-  }
+    .iconcard {
+      display: flex;
+      align-items: center;
+      border-radius: 0rem;
+      box-shadow: none;
+      overflow: hidden;
+      height: 160px;
+      max-width: 600px;
+      padding: 0;        /* Kein Innenabstand */
+      margin: 0;         /* Kein Außenabstand */
+      border: none;      /* Kein Rahmen */
+      background: none;  /* Kein Hintergrund */
+    }
 
-  .icon-area img {
-    height: 80%;
-    aspect-ratio: 1 / 1;
-    border-radius: 50%;
-    object-fit: cover;
-    padding: 0;        /* Kein Innenabstand */
-    margin: 0;         /* Kein Außenabstand */
-    border: none;      /* Kein Rahmen */
-    background: none;  /* Kein Hintergrund */
-  }
+    .icon-area {
+      flex: 0 0 33%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+    }
 
-  .text-area {
-    padding-left: 1rem;
-  }
+    .icon-area img {
+      height: 80%;
+      aspect-ratio: 1 / 1;
+      border-radius: 50%;
+      object-fit: cover;
+      padding: 0;        /* Kein Innenabstand */
+      margin: 0;         /* Kein Außenabstand */
+      border: none;      /* Kein Rahmen */
+      background: none;  /* Kein Hintergrund */
+    }
 
-  .text-area h3 {
-    margin: 0;
-    font-size: 1.25rem;
-    font-weight: 600;
-  }
+    .text-area {
+      padding-left: 1rem;
+    }
 
-  .text-area p {
-    margin-top: 0.25rem;
-    color: var(--accent) !important;
-    font-size: 0.95rem;
-  }
+    .text-area h3 {
+      margin: 0;
+      font-size: 1.25rem;
+      font-weight: 600;
+    }
 
-  #homiemoon label {
-    padding-left: 1rem; /* Oder 2.5rem, je nach gewünschtem Abstand */
-  }
+    .text-area p {
+      margin-top: 0.25rem;
+      color: var(--accent) !important;
+      font-size: 0.95rem;
+    }
+
+    #homiemoon label {
+      padding-left: 1rem; /* Oder 2.5rem, je nach gewünschtem Abstand */
+    }
   </style>
   
 </head>
@@ -322,13 +329,15 @@
       <input type="hidden" name="name" id="input-name" />    
       <label>
         <span id="form-attending" data-i18n="form.attending.singular"></span>
-        <select name="attending" id="attending-select" required>
+        <div id="attending-error" class="text-red-500 text-sm mt-1"></div>
+        <select name="attending" id="attending-select">
           <!-- Optionen werden dynamisch gesetzt -->
         </select>
       </label>
     
       <label id="who-label">
         <span data-i18n="form.who"></span>
+        <div id="who-error" class="text-red-500 text-sm mt-1"></div>
         <select name="who" id="who-select">
           <!-- Optionen werden dynamisch gesetzt -->
         </select>
@@ -482,6 +491,9 @@
         "jakarta": "Jakarta",
         "jakarta.address": "TBD, Indonesia",
         "jakarta.start": "Beginn: 13:30",
+        "tinki": "Wichtiger Hinweis",
+        "tinki.text": "Unsere kleine Welt und unser Herz Tinki, ist leider nicht mehr die Jüngste.",
+        "tinki.cont": "Sollte es ihr kurz vor der Hochzeit gesundheitlich schlecht gehen – was wir natürlich alle nicht hoffen – würde Patricia aus Liebe und Verantwortung nicht nach Indonesien fliegen. Wir möchten euch daher dringend empfehlen, eure Reise stornierbar zu buchen oder möglichst mit der Kreditkarte zu zahlen, da viele Kreditkarten oft eine Stornoversicherung inklusive haben. Diese Entscheidung würde uns wirklich nicht leicht fallen und wir hoffen sehr auf euer Verständnis. Eure Rücksichtnahme bedeutet uns sehr viel.",
         "dresscode": "Dresscode",
         "agenda": "Agenda",
         "agenda.comingsoon": "Die Agenda der Hochzeit wird zwei Monate vorher hier zu finden sein.",
@@ -497,6 +509,8 @@
         "form.homiemoon.option.gili": "Schnorcheln und Baden auf den Gilli Islands (Flug über Lombok + Boot)",
         "form.homiemoon.option.lembongan": "Island-life auf Nusa Lembongan (Flug über Bali + Boot)",
         "form.homiemoon.option.komodo": "Ein paar Nächte auf einem Boot in Flores/Komodo (Flug)",
+        "form.validation.attending": "Bitte Teilnahme auswählen.",
+        "form.validation.whocomes": "Bitte auswählen wer kommt.",
         "faq.id.question1": "Wie sieht eine Hochzeit in Indonesien aus?",
         "faq.id.answer1": "Indonesische Hochzeiten sind oft sehr festlich und bunt – je nach Region und kulturellem Hintergrund können sie ganz unterschiedlich aussehen. In vielen Fällen handelt es sich um große Feiern mit hunderten oder sogar tausenden Gästen, traditioneller Kleidung, rituellen Zeremonien und opulenten Dekorationen. <b>Unsere Hochzeit wird allerdings etwas anders aussehen.</b> Wir feiern im kleineren Kreis – mit Familie und engen Freunden – und gestalten den Tag als eine Mischung aus traditionellen indonesischen Elementen und modernen, persönlichen Akzenten. Uns ist wichtig, dass die Feier authentisch und entspannt ist und zu uns als Paar passt. Deshalb gibt es bei uns keine riesige Gästeliste und kein übertriebenes Zeremoniell, sondern wie Patricia's Wurzeln: ein Mix aus beiden Kulturen.",
         "faq.id.question2": "Wie lange fliegt man von Österreich nach Indonesien?",
@@ -566,6 +580,9 @@
         "jakarta": "Jakarta",
         "jakarta.address": "TBD, Indonesia",
         "jakarta.start": "Start: 1:30 PM",
+        "tinki": "Important Note",
+        "tinki.text": "Our little world and our beloved heart Tinki is unfortunately not getting any younger.",
+        "tinki.cont": "If, shortly before the wedding, her health were to decline – which of course we all hope won’t happen – Patricia, out of love and responsibility, would not fly to Indonesia. We therefore strongly recommend booking your trip with cancellation options or paying by credit card, as many credit cards include travel cancellation insurance. This decision would be incredibly difficult for us, and we truly hope for your understanding. Your consideration means the world to us.",
         "dresscode": "Dresscode",
         "agenda": "Agenda",
         "agenda.comingsoon": "The wedding agenda will be available here two months in advance.",
@@ -581,6 +598,8 @@
         "form.homiemoon.option.gili": "Snorkeling and swimming at the Gili Islands (flight via Lombok + boat)",
         "form.homiemoon.option.lembongan": "Island life on Nusa Lembongan (flight via Bali + boat)",
         "form.homiemoon.option.komodo": "A few nights on a boat in Flores/Komodo (flight)",
+        "form.validation.attending": "Please select attendance.",
+        "form.validation.whocomes": "Please select who is coming.",
         "faq.id.question1": "What does a wedding in Indonesia look like?",
         "faq.id.answer1": "Indonesian weddings are often very festive and colorful – depending on the region and cultural background, they can look very different. In many cases, they are large celebrations with hundreds or even thousands of guests, traditional clothing, ritual ceremonies, and lavish decorations. <b>However, our wedding will look a bit different.</b> We are celebrating in a smaller circle – with family and close friends – and designing the day as a mix of traditional Indonesian elements and modern, personal touches. It is important to us that the celebration is authentic and relaxed and fits us as a couple. That’s why we don’t have a huge guest list or an exaggerated ceremony, but rather, like Patricia’s roots: a mix of both cultures.",
         "faq.id.question2": "How long is the flight from Austria to Indonesia?",
@@ -649,6 +668,9 @@
         "jakarta": "Jakarta",
         "jakarta.address": "Akan ditentukan, Indonesia",
         "jakarta.start": "Mulai: 13.30",
+        "tinki": "Catatan Penting",
+        "tinki.text": "Dunia kecil kami dan hati kami yang tercinta, Tinki, sayangnya sudah tidak muda lagi.",
+        "tinki.cont": "Jika kesehatan Tinki memburuk menjelang hari pernikahan – yang tentu sangat kami harapkan tidak terjadi – Patricia, karena rasa cinta dan tanggung jawab, tidak akan terbang ke Indonesia. Karena itu, kami sangat menyarankan kalian untuk memesan perjalanan dengan opsi pembatalan atau membayar dengan kartu kredit, karena banyak kartu kredit sudah termasuk asuransi pembatalan perjalanan. Keputusan ini tentu akan sangat berat bagi kami, dan kami sungguh berharap atas pengertian kalian. Perhatian kalian sungguh sangat berarti bagi kami.",
         "dresscode": "Kode Busana",
         "agenda": "Agenda",
         "agenda.comingsoon": "Agenda pernikahan akan tersedia di sini dua bulan sebelumnya.",
@@ -664,6 +686,8 @@
         "form.homiemoon.option.gili": "Snorkeling dan berenang di Gili Islands (terbang via Lombok + kapal)",
         "form.homiemoon.option.lembongan": "Island life di Nusa Lembongan (terbang via Bali + kapal)",
         "form.homiemoon.option.komodo": "Beberapa malam di atas kapal di Flores/Komodo (terbang)",
+        "form.validation.attending": "Silakan pilih kehadiran.",
+        "form.validation.whocomes": "Silakan pilih siapa saja yang datang.",
         "faq.id.question1": "Seperti apa pernikahan di Indonesia?",
         "faq.id.answer1": "Pernikahan di Indonesia sering kali sangat meriah dan penuh warna – tergantung pada daerah dan latar belakang budaya, bisa sangat berbeda-beda. Dalam banyak kasus, perayaan besar dengan ratusan atau bahkan ribuan tamu, pakaian tradisional, upacara ritual, dan dekorasi yang mewah. <b>Namun, pernikahan kami akan sedikit berbeda.</b> Kami merayakannya dalam lingkaran kecil – dengan keluarga dan teman dekat – dan merancang hari itu sebagai campuran elemen tradisional Indonesia dan sentuhan modern serta pribadi. Penting bagi kami agar perayaan ini otentik dan santai serta sesuai dengan kami sebagai pasangan. Oleh karena itu, kami tidak memiliki daftar tamu yang besar atau upacara yang berlebihan, melainkan seperti akar Patricia: campuran dari kedua budaya.",
         "faq.id.question2": "Berapa lama penerbangan dari Austria ke Indonesia?",
@@ -734,6 +758,16 @@
         </div>
         <div class="iconcard mx-auto w-full max-w-[90%] sm:max-w-md">
           <div class="icon-area flex-shrink-0 w-1/3 flex justify-center">
+            <img src="icon-beach.png" alt="Icon" class="h-[80%] rounded-full object-contain" />
+          </div>
+          <div class="text-area text-left w-2/3">
+            <h3 class="text-xl font-semibold mb-2" data-i18n="tinki"></h3>
+            <p class="text-gray-600" data-i18n="tinki.text"></p>
+          </div>
+        </div>
+        <div class="card mt-0 pt-0 pb-0" data-i18n="tinki.cont"></div>
+        <div class="iconcard mx-auto w-full max-w-[90%] sm:max-w-md">
+          <div class="icon-area flex-shrink-0 w-1/3 flex justify-center">
             <img src="icon-rings.png" alt="Icon" class="h-[80%] rounded-full object-contain" />
           </div>
           <div class="text-area text-left w-2/3">
@@ -749,62 +783,63 @@
             <h3 class="text-xl font-semibold mb-2" data-i18n="homiemoon"></h3>
             <p class="text-gray-600" data-i18n="homiemoon.description"></p>
           </div>
-        </div><p id="homiemoon-text" data-i18n="homiemoon.cont"></p>
+        </div>
+        <div class="card pt-0 mt-0 pb-0" id="homiemoon-text" data-i18n="homiemoon.cont"></div>
 `
     };
 
     const faq = {
-      at: `<div class="card">
+      at: `<div class="card faq-item">
         <div class="faq-question">${text["faq.at.question1"]}</div>
         <div class="faq-answer">${text["faq.at.answer1"]}</div>
       </div>
-      <div class="card">
+      <div class="card faq-item">
         <div class="faq-question">${text["faq.at.question2"]}</div>
         <div class="faq-answer">${text["faq.at.answer2"]}</div>
       </div>
-      <div class="card">
+      <div class="card faq-item">
         <div class="faq-question">${text["faq.at.question3"]}</div>
         <div class="faq-answer">${text["faq.at.answer3"]}</div>
       </div>`,
 
       id: `
-      <div class="card">
+      <div class="card faq-item">
         <div class="faq-question">${text["faq.id.question1"]}</div>
         <div class="faq-answer">${text["faq.id.answer1"]}</div>
       </div>
-      <div class="card">
+      <div class="card faq-item">
         <div class="faq-question">${text["faq.id.question2"]}</div>
         <div class="faq-answer">${text["faq.id.answer2"]}</div>
       </div>
-      <div class="card">
+      <div class="card faq-item">
         <div class="faq-question">${text["faq.id.question3"]}</div>
         <div class="faq-answer">${text["faq.id.answer3"]}</div>
       </div>
-      <div class="card">
+      <div class="card faq-item">
         <div class="faq-question">${text["faq.id.question4"]}</div>
         <div class="faq-answer">${text["faq.id.answer4"]}</div>
       </div>
-      <div class="card">
+      <div class="card faq-item">
         <div class="faq-question">${text["faq.id.question5"]}</div>
         <div class="faq-answer">${text["faq.id.answer5"]}</div>
       </div>
-      <div class="card">
+      <div class="card faq-item">
         <div class="faq-question">${text["faq.id.question6"]}</div>
         <div class="faq-answer">${text["faq.id.answer6"]}</div>
       </div>
-      <div class="card">
+      <div class="card faq-item">
         <div class="faq-question">${text["faq.id.question7"]}</div>
         <div class="faq-answer">${text["faq.id.answer7"]}</div>
       </div>
-      <div class="card">
+      <div class="card faq-item">
         <div class="faq-question">${text["faq.id.question8"]}</div>
         <div class="faq-answer">${text["faq.id.answer8"]}</div>
       </div>
-      <div class="card">
+      <div class="card faq-item">
         <div class="faq-question">${text["faq.id.question9"]}</div>
         <div class="faq-answer">${text["faq.id.answer9"]}</div>
       </div>
-      <div class="card">
+      <div class="card faq-item">
         <div class="faq-question">${text["faq.id.question10"]}</div>
         <div class="faq-answer">${text["faq.id.answer10"]}</div>
       </div>`
@@ -913,7 +948,9 @@
       const allergiesLabel = document.getElementById("allergies-label");
       const allergiesInput = document.getElementById("allergies");
       const homiemoon = document.getElementById("homiemoon");
+      const validationAttending = document.getElementById("attending-error");
 
+      validationAttending.textContent = "";
 
       if (this.value === "NO") {
         whoSelect.style.display = "none";
@@ -970,6 +1007,11 @@
       selectWho.appendChild(o);
     });
 
+    selectWho.addEventListener("change", function () {
+      const validationWho = document.getElementById("who-error");
+      validationWho.textContent = "";
+    });
+
     document.getElementById("allergies").placeholder = text["form.allergies.placeholder"];
 
     if(!plusOneAllowed && partnerParam === '')
@@ -981,6 +1023,35 @@
     document.getElementById("rsvp-form").addEventListener("submit", async function(e) {
       e.preventDefault();
       const form = e.target;
+
+      // Felder
+      const attendingSelect = form.attending;
+      const whoSelect = form.who;
+
+      // Fehlercontainer (jeweils UNTER dem Feld platzieren im HTML)
+      const attendingError = document.getElementById("attending-error");
+      const whoError = document.getElementById("who-error");
+
+      // Fehlerstatus zurücksetzen
+      attendingError.textContent = "";
+      whoError.textContent = "";
+
+      let hasError = false;
+
+      // Validierung
+      if (!attendingSelect.value) {
+        attendingError.textContent = text["form.validation.attending"];
+        hasError = true;
+      }
+
+      // Nur prüfen, wenn who-Select sichtbar ist
+      if (whoSelect.offsetParent !== null && !whoSelect.value) {
+        whoError.textContent = text["form.validation.whocomes"];
+        hasError = true;
+      }
+
+      if (hasError) return; // Abbrechen bei Fehler
+
       const homiemoonSelections = Array.from(
           form.querySelectorAll('input[name="homiemoon[]"]:checked')
         ).map(cb => cb.value);

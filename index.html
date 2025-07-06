@@ -6,7 +6,7 @@
   <meta name="color-scheme" content="only light">
   <title>Patricia & Paul</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2280%22>💍</text></svg>">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Lato&family=Imperial+Script&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Lato&family=Imperial+Script&display=swap" rel="stylesheet" />
 
   <script src="https://cdn.tailwindcss.com" data-tailwind-config='{"darkMode":"class"}'></script>
   <style>
@@ -146,11 +146,6 @@
   
     footer {
       color: var(--accent);
-    }
-  
-    #faq-section {
-    /* Hintergrund Burgunderrot der Seite */
-    background-color: var(--primary);
     }
 
     .faq-item {
@@ -365,21 +360,21 @@
       </fieldset>
 
       <button data-i18n="form.submit" type="submit"></button>
-    </form>    
+    </form>
+    <h3 id="successMessage" style="display: none;" class="card text-center mt-4" data-i18n="form.success"></h3>    
   </section>
   <section class="py-12 px-4 text-center">
     <img src="background-flowers2.png" alt="Blumenhintergrund" class="mx-auto rounded-2xl max-w-md w-full max-w-[90%] sm:max-w-md fade-slide" />
-    <h2 class="text-3xl mb-6" data-i18n="dresscode"></h2>
+    <h2 class="text-3xl mb-6 fade-slide" data-i18n="dresscode"></h2>
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto">
-      <img src="dresscode-1.jpg" alt="Dresscode 1" class="rounded-lg shadow-md object-cover w-full h-72 cursor-pointer" onclick="openModal(this.src)" />
-      <img src="dresscode-1.jpg" alt="Dresscode 2" class="rounded-lg shadow-md object-cover w-full h-72 cursor-pointer" onclick="openModal(this.src)" />
-      <img src="dresscode-1.jpg" alt="Dresscode 3" class="rounded-lg shadow-md object-cover w-full h-72 cursor-pointer" onclick="openModal(this.src)" />
-      <img src="dresscode-1.jpg" alt="Dresscode 4" class="rounded-lg shadow-md object-cover w-full h-72 cursor-pointer" onclick="openModal(this.src)" />
+      <img src="dresscode-colors.png" alt="Dresscode Colors"class="w-1/2 mx-auto rounded-lg shadow-md object-cover cursor-pointer fade-slide" />
+      <div class="grid grid-cols-2 gap-4">
+        <img src="dresscode-1.png" alt="Dresscode 1" class="rounded-lg shadow-md object-cover w-full h-full cursor-pointer fade-slide" onclick="openModal(this.src)" />
+        <img src="dresscode-2.png" alt="Dresscode 2" class="rounded-lg shadow-md object-cover w-full h-full cursor-pointer fade-slide" onclick="openModal(this.src)" />
+        <img src="dresscode-3.png" alt="Dresscode 3" class="rounded-lg shadow-md object-cover w-full h-full cursor-pointer fade-slide onclick="openModal(this.src)" />
+        <img src="dresscode-4.png" alt="Dresscode 4" class="rounded-lg shadow-md object-cover w-full h-full cursor-pointer fade-slide onclick="openModal(this.src)" />
+      </div>
     </div>
-  </section>
-  <section id="faq" class="text-center py-10 px-4">
-    <h2 class="text-3xl mb-6" data-i18n="faq.title"></h2>
-    <div id="faq-content"></div>
   </section>
   <section id="fotos" class="text-center py-10 px-4">
     <div class="iconcard mx-auto w-full max-w-[90%] sm:max-w-md">
@@ -403,6 +398,10 @@
         <p class="text-gray-600" data-i18n="presents.cashplease"></p>
       </div>
     </div>
+  </section>
+  <section id="faq" class="text-center py-10 px-4">
+    <h2 class="text-3xl mb-6" data-i18n="faq.title"></h2>
+    <div id="faq-content"></div>
   </section>
   <footer data-i18n="footer.copyright" class="text-center py-4 text-sm text-gray-500">
   </footer>
@@ -429,6 +428,7 @@
       return params;
     }
 
+    const googleScriptURL = "https://script.google.com/macros/s/AKfycbxL3HlpFpuCoJxczKlxwVrQFO2nZlY0JLoZumBGAvC6Uq5izYk66n0csQn7CzVW55y07g/exec";
     const params = getUrlParams();
     const guestParam = params.guest || '';
     const plusOneAllowed = params.plusone === '1';
@@ -480,6 +480,7 @@
         "form.allergies.placeholder": "z.B. Nüsse, Laktose, etc.",
         "form.submit": "Antwort absenden",
         "form.success": "Danke für deine Rückmeldung!",
+        "form.failure": "Fehler beim Absenden. Bitte versuche es später erneut.",
         "faq.title": "Oft gestellte Fragen",
         "footer.copyright": "© 2025 Patricia & Paul – Wir freuen uns auf euch!",
         "and": "und",
@@ -568,7 +569,8 @@
         "form.allergies": "Allergies / intolerances",
         "form.allergies.placeholder": "e.g., nuts, lactose, ...",
         "form.submit": "Send your answer",
-        "form.success": "Thank you for your feedback!",
+        "form.success": "Thank you for your reply!",
+        "form.failure": "Submission failed. Please try again later.",
         "faq.title": "Frequently Asked Questions",
         "footer.copyright": "© 2025 Patricia & Paul – We can't wait to celebrate with you!",
         "and": "and",
@@ -657,6 +659,7 @@
         "form.allergies.placeholder": "contoh: kacang, laktosa, dll.",
         "form.submit": "Kirim jawaban",
         "form.success": "Terima kasih atas tanggapanmu!",
+        "form.failure": "Pengiriman gagal. Silakan coba lagi nanti.",
         "faq.title": "Pertanyaan yang Sering Diajukan",
         "footer.copyright": "© 2025 Patricia & Paul – Kami tidak sabar untuk merayakan bersama Anda!",
         "and": "dan",
@@ -758,7 +761,7 @@
         </div>
         <div class="iconcard mx-auto w-full max-w-[90%] sm:max-w-md">
           <div class="icon-area flex-shrink-0 w-1/3 flex justify-center">
-            <img src="icon-beach.png" alt="Icon" class="h-[80%] rounded-full object-contain" />
+            <img src="icon-tinki.png" alt="Icon" class="h-[80%] rounded-full object-contain" />
           </div>
           <div class="text-area text-left w-2/3">
             <h3 class="text-xl font-semibold mb-2" data-i18n="tinki"></h3>
@@ -1056,6 +1059,7 @@
           form.querySelectorAll('input[name="homiemoon[]"]:checked')
         ).map(cb => cb.value);
       const dataToSend = {
+        action: "submit",
         name: form.name.value,
         attending: form.attending.value,
         who: form.who.value,
@@ -1064,7 +1068,7 @@
         homiemoon: homiemoonSelections
       };
       try {
-        await fetch("https://script.google.com/macros/s/AKfycbwQTLNstqdPFSsl1JJlh_TTz8dlwUEx8T6Auraww7sBHcHjjD4Y2amXKwUqtXDzVcOlRA/exec", {
+        await fetch(googleScriptURL, {
           method: "POST",
           mode: "no-cors",
           headers: { "Content-Type": "application/json" },
@@ -1072,11 +1076,11 @@
         });
         const successCard = document.createElement("div");
         successCard.className = "card text-center mt-4";
-        successCard.innerHTML = "<h3>Danke für deine Rückmeldung!</h3>";
+        successCard.innerHTML = `<h3>${text["form.success"]}</h3>`;
         form.replaceWith(successCard);
         form.reset();
       } catch (error) {
-        alert("Fehler beim Absenden. Bitte versuche es später erneut.");
+        alert(text["form.failure"]);
       }
     });
 
@@ -1132,6 +1136,27 @@
     }
 
   }
+
+  async function checkIfNameExists(name) {
+    const res = await fetch(`${googleScriptURL}?name=${encodeURIComponent(name)}`);
+    const data = await res.json();
+    console.log(name);
+    console.log(data.status);
+    if (data.status === "existing") {
+      console.log("returning true");
+      return true;
+    } else {
+      return false;
+    }
+  }
+  
+  checkIfNameExists(guestName).then(exists => {
+    if (exists) {
+      document.getElementById("rsvp-form").style.display = "none";
+      document.getElementById("successMessage").style.display = "";
+    }
+  });
+  
 
   document.addEventListener("DOMContentLoaded", () => {
     translatePage(lang);

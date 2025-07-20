@@ -383,7 +383,7 @@
       <div class="icon-area w-[150px] h-[150px] flex justify-center items-center overflow-hidden rounded-full mx-auto mb-4">
         <img src="icon-camera.png" alt="Icon" class="w-full h-full object-cover rounded-full" />
       </div>
-      <div class="text-area text-left w-[80%]">
+      <div class="text-area text-left w-[90%]">
         <h3 class="text-xl font-semibold mb-2" data-i18n="fotos"></h3>
         <p class="text-gray-600" data-i18n="fotos.upload"></p>
         <a class="text-gray-600" data-i18n="fotos.uploadlink" href="https://www.dropbox.com/request/E2YrIDGz8KWOUGAF2Xpu?oref=e" target="_blank" rel="noopener noreferrer"></a>
@@ -393,7 +393,7 @@
       <div class="icon-area w-[150px] h-[150px] flex justify-center items-center overflow-hidden rounded-full mx-auto mb-4">
         <img src="icon-present.png" alt="Icon" class="w-full h-full object-cover rounded-full" />
       </div>
-      <div class="text-area text-left w-[80%]">
+      <div class="text-area text-left w-[90%]">
         <h3 class="text-xl font-semibold mb-2" data-i18n="presents"></h3>
         <p class="text-gray-600" data-i18n=" presents.description"></p>
       </div>
@@ -734,7 +734,7 @@
           <div class="icon-area icon-area w-[150px] h-[150px] flex justify-center items-center overflow-hidden rounded-full mx-auto mb-4">
             <img src="icon-wallhof.png" alt="Icon" class="w-full h-full object-cover rounded-full" />
           </div>
-          <div class="text-area text-left w-[80%]">
+          <div class="text-area text-left w-[90%]">
             <h3 class="text-xl font-semibold mb-2" data-i18n="wallhof"></h3>
             <p class="text-gray-600" data-i18n="wallhof.address"></p>
             <p class="text-gray-600" data-i18n="wallhof.start"></p>
@@ -744,7 +744,7 @@
           <div class="icon-area icon-area w-[150px] h-[150px] flex justify-center items-center overflow-hidden rounded-full mx-auto mb-4">
             <img src="icon-rings.png" alt="Icon" class="w-full h-full object-cover rounded-full" />
           </div>
-          <div class="text-area text-left w-[80%]">
+          <div class="text-area text-left w-[90%]">
             <h3 class="text-xl font-semibold mb-2" data-i18n="agenda"></h3>
             <p class="text-gray-600" data-i18n="agenda.comingsoon"></p>
           </div>
@@ -757,7 +757,7 @@
           <div class="icon-area w-[150px] h-[150px] flex justify-center items-center overflow-hidden rounded-full mx-auto mb-4">
             <img src="icon-beach.png" alt="Icon" class="w-full h-full object-cover rounded-full" />
           </div>
-          <div class="text-area text-left w-[80%]">
+          <div class="text-area text-left w-[90%]">
             <h3 class="text-xl font-semibold mb-2" data-i18n="jakarta"></h3>
             <p class="text-gray-600" data-i18n="jakarta.address"></p>
             <p class="text-gray-600" data-i18n="jakarta.start"></p>
@@ -767,7 +767,7 @@
           <div class="icon-area w-[150px] h-[150px] flex justify-center items-center overflow-hidden rounded-full mx-auto mb-4">
             <img src="icon-tinki.png" alt="Icon" class="w-full h-full object-cover rounded-full" onclick="openModal(this.src)" />
           </div>
-          <div class="text-area text-left w-[80%]">
+          <div class="text-area text-left w-[90%]">
             <h3 class="text-xl font-semibold mb-2" data-i18n="tinki"></h3>
             <p class="text-gray-600" data-i18n="tinki.text"></p>
           </div>
@@ -776,7 +776,7 @@
           <div class="icon-area w-[150px] h-[150px] flex justify-center items-center overflow-hidden rounded-full mx-auto mb-4">
             <img src="icon-rings.png" alt="Icon" class="w-full h-full object-cover rounded-full" />
           </div>
-          <div class="text-area text-left w-[80%]">
+          <div class="text-area text-left w-[90%]">
             <h3 class="text-xl font-semibold mb-2" data-i18n="agenda"></h3>
             <p class="text-gray-600" data-i18n="agenda.comingsoon"></p>
           </div>
@@ -785,7 +785,7 @@
           <div class="icon-area icon-area icon-area w-[150px] h-[150px] flex justify-center items-center overflow-hidden rounded-full mx-auto mb-4">
             <img src="icon-homiemoon.png" alt="Icon" class="w-full h-full object-cover rounded-full" />
           </div>
-          <div class="text-area text-left w-[80%]">
+          <div class="text-area text-left w-[90%]">
             <h3 class="text-xl font-semibold mb-2" data-i18n="homiemoon"></h3>
             <p class="text-gray-600" data-i18n="homiemoon.description"></p>
           </div>
@@ -887,7 +887,7 @@
           });
 
           btn.scrollIntoView({ behavior: "auto", block: "start" });
-          setTimeout(() => { window.scrollBy({ top: -100, behavior: "auto" }); }, 0);
+          setTimeout(() => { window.scrollBy({ top: -100, behavior: "auto" }); }, 300);
         });
       });
     }
@@ -1137,10 +1137,10 @@
     if(partnerParam) { 
       partnerName = decodeURIComponent(partnerParam.replace(/-/g, ' '));
       const partnerFirstName = partnerName.split(' ')[0];
-        document.getElementById("rsvp-text").innerText = `${text["rsvp.title.plural"]}, ${firstName} ` + dict["and"] + ` ${partnerFirstName}`;
-        document.getElementById("invitation").innerText = `${text["invitation.hello.plural"]}, ${firstName} ` + dict["and"] + ` ${partnerFirstName}!`;
-        document.getElementById("invitation.greeting").innerText = `${text["invitation.greeting.plural"]}`;
-        document.getElementById("form-attending").innerText = `${text["form.attending.plural"]}`;
+      document.getElementById("rsvp-text").innerText = `${text["rsvp.title.plural"]}, ${firstName} ` + dict["and"] + ` ${partnerFirstName}`;
+      document.getElementById("invitation").innerText = `${text["invitation.hello.plural"]}, ${firstName} ` + dict["and"] + ` ${partnerFirstName}!`;
+      document.getElementById("invitation.greeting").innerText = `${text["invitation.greeting.plural"]}`;
+      document.getElementById("form-attending").innerText = `${text["form.attending.plural"]}`;
     } else {    
       document.getElementById("rsvp-text").innerText += `, ${firstName}`;
       document.getElementById("invitation").innerText += `, ${firstName}!`;

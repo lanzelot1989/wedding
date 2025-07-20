@@ -321,7 +321,7 @@
   </section>
 
   <section class="py-10 px-4 fade-slide">
-    <img src="background-flowers2.png" alt="Blumenhintergrund" class="mx-auto rounded-2xl max-w-md w-full max-w-[90%] sm:max-w-md fade-slide" />
+    <img src="header-background.png" alt="Blumenhintergrund" class="mx-auto rounded-2xl max-w-md w-full max-w-[90%] sm:max-w-md fade-slide" />
     <h2 data-i18n="rsvp.title.singular" id="rsvp-text" class="text-3xl text-center mb-4 fade-slide"></h2>
     <form id="rsvp-form" autocomplete="off">
       <input type="hidden" name="name" id="input-name" />
@@ -882,6 +882,8 @@
               content.classList.remove("active");
             }
           });
+
+          btn.scrollIntoView({ behavior: "auto", block: "start" });
         });
       });
     }
